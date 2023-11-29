@@ -1,0 +1,8 @@
+robotframework
+robotframework-tidy
+rpaframework
+rpaframework-pdf
+rpaframework-recognition
+rpaframework-assistant
+jsonpath-ng
+tensorboard
