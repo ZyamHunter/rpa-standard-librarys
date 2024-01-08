@@ -2,3 +2,7 @@ __pycache__/
 .env
 results/
 logs/
+project-venv/
+IMAGE.zip
+FILES.tar
+WP_MB02.png

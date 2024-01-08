@@ -1,8 +1,8 @@
-robotframework
-robotframework-tidy
-rpaframework
-rpaframework-pdf
-rpaframework-recognition
-rpaframework-assistant
-jsonpath-ng
-tensorboard
+robotframework==6.1.1
+robotframework-tidy==4.8.0
+rpaframework==28.0.0
+rpaframework-pdf==7.3.1
+rpaframework-recognition==5.2.3
+rpaframework-assistant==3.0.2
+jsonpath-ng==1.6.0
+tensorboard==2.15.1
