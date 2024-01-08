@@ -29,7 +29,6 @@ env:
 jobs:
   ci_archive:
     name: CI - Test Archive
-    runs-on: ["self-hosted"]
     steps:
       - name: ⬇️ Checkout
         uses: actions/checkout@v3
@@ -48,7 +47,6 @@ jobs:
   ci_json:
     name: CI - Test Json
     if: always ()
-    runs-on: ["self-hosted"]
     steps:
       - name: ⬇️ Checkout
         uses: actions/checkout@v3
@@ -67,7 +65,6 @@ jobs:
   ci_operatingSystem:
     name: CI - Test Operating System
     if: always ()
-    runs-on: ["self-hosted"]
     steps:
       - name: ⬇️ Checkout
         uses: actions/checkout@v3
@@ -87,7 +84,6 @@ jobs:
     name: CI - Send Test Status to Slack
     needs: [ci_archive, ci_json, ci_operatingSystem]
     if: always ()
-    runs-on: ["self-hosted"]
     steps:
       - name: ⬇️ Checkout
         uses: actions/checkout@v3
