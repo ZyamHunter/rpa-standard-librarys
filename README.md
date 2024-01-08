@@ -1,3 +1,5 @@
+[![Standard](https://github.com/ZyamHunter/rpa-standard-librarys/actions/workflows/standard.yaml/badge.svg)](https://github.com/ZyamHunter/rpa-standard-librarys/actions/workflows/standard.yaml)
+
 # rpa-standard-librarys
 > Repositório de testes dedicados ao uso das mais variadas bibliotecas do robot framework, especificamente a rpaframework
 
