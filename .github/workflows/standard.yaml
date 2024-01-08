@@ -85,7 +85,7 @@ jobs:
 
   report_slack:
     name: CI - Send Test Status to Slack
-    needs: [ci_mooz, ci_bank, ci_operatingSystem]
+    needs: [ci_archive, ci_json, ci_operatingSystem]
     if: always ()
     runs-on: ["self-hosted"]
     steps:
