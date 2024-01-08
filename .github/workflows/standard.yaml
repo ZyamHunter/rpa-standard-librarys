@@ -1,0 +1,108 @@
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "feature/**"
+      - "fix/**"
+      - "release/**"
+    paths-ignore:
+      - "**/*.md"
+      - .scafflater/**
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "**/*.md"
+      - .scafflater/**
+  workflow_dispatch:
+
+name: Standard
+
+env:
+  app_name: "testes"
+  aws_region: "us-east-1"
+  dockerfilePath: "dockerfiles/Dockerfile"
+  namespace: "robot-framework"
+  value_stream: "rpaframework"
+
+jobs:
+  ci_archive:
+    name: CI - Test Archive
+    runs-on: ["self-hosted"]
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Archive Robot tests
+        run: |
+          robot -d archive ./src/archive/tests/archive.robot
+        continue-on-error: true
+      - name: ⬆️ Upload Archive Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: archive-report
+          path: archive
+
+  ci_json:
+    name: CI - Test Json
+    if: always ()
+    runs-on: ["self-hosted"]
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Json Robot tests
+        run: |
+          robot -d json ./src/json/tests/json.robot
+        continue-on-error: true
+      - name: ⬆️ Upload Json Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: json-report
+          path: json
+
+  ci_operatingSystem:
+    name: CI - Test Operating System
+    if: always ()
+    runs-on: ["self-hosted"]
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: 🧪 Run Operating System Robot tests
+        run: |
+          robot -d system ./src/operatingSystem/tests/system.robot
+        continue-on-error: true
+      - name: ⬆️ Upload System Test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-report
+          path: system
+
+  report_slack:
+    name: CI - Send Test Status to Slack
+    needs: [ci_mooz, ci_bank, ci_operatingSystem]
+    if: always ()
+    runs-on: ["self-hosted"]
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Default Steps
+        uses: ./.github/actions/setup-composite
+      - name: ⬇️ Download Artifacts
+        uses: actions/download-artifact@v4
+      - run: ls
+      - name: 📁 Rename paths
+        run: |
+          mv system-report system
+          mv archive-report archive
+          mv json-report json
+      - name: 📨 Run Curl Message To Slack
+        run:
+          # robot ./Helpers/Curl_Slack.robot
+          echo "Enviando report de testes para o slack"
+
