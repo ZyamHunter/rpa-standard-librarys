@@ -1,15 +1,19 @@
 *** Settings ***
 Library     RPA.Archive
 Library     RPA.FileSystem
+Library    ../../Helpers/Absolute_path.py
 
 
 *** Tasks ***
 Add To Archive
-    Add To Archive    src\\archive\\assets\\IMAGE.zip    src\\archive\\assets\\OTHER_IMAGE.zip
+    ${PATH}    Get Absolute Path    src\\archive\\assets\\IMAGE.zip
+    Add To Archive    ${PATH}    src\\archive\\assets\\OTHER_IMAGE.zip
 
 Archive Folder With Tar
-    Archive Folder With ZIP    src\\archive\\assets    ${OUTPUT_DIR}${/}FILES.tar    recursive=True
-    Archive Folder With ZIP    src\\archive\\assets    FILES.tar    recursive=True
+    ${PATH}    Get Absolute Path    src\\archive\\assets
+
+    Archive Folder With ZIP    ${PATH}    ${OUTPUT_DIR}${/}FILES.tar    recursive=True
+    Archive Folder With ZIP    ${PATH}    FILES.tar    recursive=True
     &{info}    Get Archive Info    ${OUTPUT_DIR}${/}FILES.tar
 
 Extract File From Archive
@@ -19,14 +23,20 @@ Extract Archive
     ${RESULT}    Extract Archive    archive_name=IMAGE.zip
 
 Get Archive Info
-    &{info}    Get Archive Info    src\\archive\\assets\\TAXA.xlsx
+    ${PATH}    Get Absolute Path     src\\archive\\assets\\TAXA.xlsx
+
+    &{info}    Get Archive Info     ${PATH}
 
 List Archive
-    @{files}    List Archive    src\\archive\\assets\\TAXA.xlsx
+    ${PATH}    Get Absolute Path     src\\archive\\assets\\TAXA.xlsx
+
+    @{files}    List Archive    ${PATH}
     FOR    ${file}    IN    ${files}
         Log    ${file}
     END
 
 Creating a ZIP archive
-    Archive Folder With ZIP    src\\archive\\assets    ${OUTPUT_DIR}${/}FILES.zip    recursive=True
+    ${PATH}    Get Absolute Path     src\\archive\\assets
+
+    Archive Folder With ZIP    ${PATH}    ${OUTPUT_DIR}${/}FILES.zip    recursive=True
     &{info}    Get Archive Info    ${OUTPUT_DIR}${/}FILES.zip

@@ -1,6 +1,7 @@
 *** Settings ***
 Library     RPA.JSON
 Library     RPA.FileSystem
+Library    ../../Helpers/Absolute_path.py
 
 
 *** Tasks ***
@@ -34,7 +35,7 @@ Delete from JSON
     Should Be Equal    ${result}    ${other_json_expected}
 
 Get value from JSON
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     ${value}=    Get value from JSON    ${JSON}    $.clients[0].orders[0]
     # other example
@@ -43,7 +44,8 @@ Get value from JSON
     Should Be Equal    ${first}    Mark
 
 Get values from JSON
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
+
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     # Find delivery addresses for all orders
     ${prices}=    Get values from JSON    ${JSON}    $..address
@@ -54,7 +56,8 @@ Get values from JSON
     @{names}=    Get values from JSON    ${people}    $.People[*].Name
 
 Get All Prices and Order Ids
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
+
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     # Arithmetic operations only work when lists are of equal lengths and types.
     ${prices}=    Get values from json
@@ -66,7 +69,8 @@ Get All Prices and Order Ids
     ...    ['guid-001 has price 103.2', 'guid-002 has price 98.99', 'guid-003 has price 22.0', 'guid-004 has price 2330.01', 'guid-005 has price 152.12']
 
 Find Only Valid Emails With Regex
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
+
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     # The regex used in this example is simplistic and
     # will not work with all email addresses
@@ -77,7 +81,8 @@ Find Only Valid Emails With Regex
     Should be equal as strings    ${emails}    ['john@example.com', 'jane@example.com']
 
 Find Orders From Texas Over 100
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
+
     &{JSON}=    Load JSON from file    ${JSON_DOC}
 
     ${orders}=    Get values from json
@@ -89,7 +94,7 @@ Find Orders From Texas Over 100
     ...    [{'address': 'Streetroad 123', 'state': 'TX', 'price': 103.2, 'id': 'guid-001'}, {'address': 'Streetroad 123', 'state': 'TX', 'price': 2330.01, 'id': 'guid-004'}]
 
 Load JSON from file
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
     &{JSON}=    Load JSON from file    ${JSON_DOC}
 
 Save dictionary to file
@@ -108,7 +113,8 @@ Update value to JSON
     Should Be Equal    ${after.People[1].Name}    JohnMalkovich
 
 Update user email
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
+
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     ${updated_doc}=    Update value to json
     ...    ${JSON}
@@ -120,8 +126,8 @@ Update user email
 
 Add additional charge to all prices in WA
     # This example also shows how the update keyword changes the original JSON doc in memory.
+    ${JSON_DOC}=    Get Absolute Path     src\\json\\assets\\users.json
 
-    ${JSON_DOC}=    Absolute Path    src\\json\\assets\\users.json
     &{JSON}=    Load JSON from file    ${JSON_DOC}
     ${ID}=    Set Variable    guid-003
 
