@@ -33,6 +33,10 @@ Instale a ferramenta `virtualenv` para criar ambientes virtuais de aprendizado:
 ## 8. Desativar ambiente virtual
 - deactivate
 
+## 9. Instalar Node.js:
+- https://nodejs.org/en/download
+ > Ao instalar, provavelmente vários pacotes adicionais serão instalados, como chocolatery, etc.
+
 ### Bibliotecas utilizadas nas tasks criadas
 
 * archive

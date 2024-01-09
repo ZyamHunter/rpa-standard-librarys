@@ -1,0 +1,12 @@
+{
+  "name": "rpa-standard-librarys",
+  "version": "1.0.0",
+  "description": "[![Standard](https://github.com/ZyamHunter/rpa-standard-librarys/actions/workflows/standard.yaml/badge.svg)](https://github.com/ZyamHunter/rpa-standard-librarys/actions/workflows/standard.yaml)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
