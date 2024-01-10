@@ -37,6 +37,10 @@ Instale a ferramenta `virtualenv` para criar ambientes virtuais de aprendizado:
 - https://nodejs.org/en/download
  > Ao instalar, provavelmente vários pacotes adicionais serão instalados, como chocolatery, etc.
 
+## 10. Instalar dependências do Python
+> Primeiro ative o ambiente virtual para evitar erros de versão com outras bibliotecas instaladas
+- pip install -r requirements.txt
+
 ### Bibliotecas utilizadas nas tasks criadas
 
 * archive
