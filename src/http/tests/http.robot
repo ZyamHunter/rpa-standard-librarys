@@ -78,7 +78,7 @@ Get Current Session Alias
     ${SESSION}    Get Current Session Alias
 
 Get File For Streaming Upload
-    ${FILE_PATH}    Absolute Path    src\\http\\assets\\users.json
+    ${FILE_PATH}    Absolute Path    src/http/assets/users.json
     Get File For Streaming Upload    ${FILE_PATH}
 
 GET On Session
