@@ -18,18 +18,18 @@ runs:
 
     - name: Install Robot Dependencies
       shell: bash
-      run: |
+      run:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-        echo Instalando o Node.js
-        curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-        sudo apt-get install -y nodejs
+        # echo Instalando o Node.js
+        # curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        # sudo apt-get install -y nodejs
 
-        echo instalando o firefox
-        wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
-        sudo tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
-        sudo apt-get update && sudo apt-get install -y wget bzip2 libxtst6 libgtk-3-0 libx11-xcb-dev libdbus-glib-1-2 libxt6 libpci-dev && sudo rm -rf /var/lib/apt/lists/*
+        # echo instalando o firefox
+        # wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
+        # sudo tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
+        # sudo apt-get update && sudo apt-get install -y wget bzip2 libxtst6 libgtk-3-0 libx11-xcb-dev libdbus-glib-1-2 libxt6 libpci-dev && sudo rm -rf /var/lib/apt/lists/*
 
     - name: Restaurar Cache do npm
       uses: actions/cache@v3

@@ -64,8 +64,8 @@ jobs:
           name: json-report
           path: json
 
-  ci_operatingSystem:
-    name: CI - Test Operating System
+  ci_http:
+    name: CI - Test Http
     if: always ()
     runs-on: ubuntu-latest
     steps:
@@ -73,15 +73,15 @@ jobs:
         uses: actions/checkout@v3
       - name: ⚙️ Default Steps
         uses: ./.github/actions/setup-composite
-      - name: 🧪 Run Operating System Robot tests
+      - name: 🧪 Run Http Robot tests
         run: |
-          robot -d system ./src/operatingSystem/tests/system.robot
+          robot -d http ./src/http/tests/http.robot
         continue-on-error: true
-      - name: ⬆️ Upload System Test results
+      - name: ⬆️ Upload Http Test results
         uses: actions/upload-artifact@v4
         with:
-          name: system-report
-          path: system
+          name: http-report
+          path: http
 
   report_slack:
     name: CI - Send Test Status to Slack
@@ -98,7 +98,7 @@ jobs:
       - run: ls
       - name: 📁 Rename paths
         run: |
-          mv system-report system
+          mv http-report system
           mv archive-report archive
           mv json-report json
       - name: 📨 Run Curl Message To Slack
