@@ -85,7 +85,7 @@ jobs:
 
   report_slack:
     name: CI - Send Test Status to Slack
-    needs: [ci_archive, ci_json, ci_operatingSystem]
+    needs: [ci_archive, ci_json, ci_http]
     if: always ()
     runs-on: ubuntu-latest
     steps:
